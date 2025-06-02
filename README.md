@@ -1,74 +1,42 @@
 # dops_suite
-# dops_suite
 
-A unified, three-tier DharmaConnect platform integrating:
+**A comprehensive DevOps, MLOps, AIOps, FinOps, LLMOps unified project suite**  
+Designed to power the DharmaConnect ecosystem with best-in-class practices for scalable, secure, and production-grade cloud native applications.
 
-- MLOps (Model Training, Drift, Auto-Retrain)
-- FinOps (Cloud Cost Control + Transparency)
-- AIOps (Automated Ops and Monitoring)
-- LLMOps (LangChain, Feedback Loops)
-- EdgeOps (Local Deployment for Temples and Regions)
+---
 
-Built for Bharat. Aligned with Sanatana values.
+## Overview
 
+dops_suite is a modular monorepo that integrates multiple operational domains:
 
-dops_suite/
-├── .github/
-│   └── workflows/
-│       └── ci-cd.yml                # GitHub Actions workflow
-├── infrastructure/
-│   ├── terraform/
-│   │   └── main.tf                  # Placeholder
-│   └── helm-charts/
-│       └── temple-service/          # Chart for one service
-├── k8s-manifests/
-│   ├── base/
-│   │   └── deployment.yaml
-│   └── overlays/
-│       ├── dev/
-│       └── prod/
-├── mlops/
-│   ├── models/
-│   ├── training/
-│   │   └── train.py
-│   ├── drift-detection/
-│   │   └── detect_drift.py
-│   └── pipelines/
-│       └── airflow_pipeline.py
-├── llmops/
-│   ├── langchain-apps/
-│   ├── rag-backend/
-│   │   └── vector_store.py
-│   └── feedback-loop/
-│       └── rlaif_trainer.py
-├── aiops/
-│   └── monitoring/
-│       ├── prometheus.yml
-│       └── grafana-dashboards/
-├── finops/
-│   └── dashboards/
-│       └── kubecost.json
-├── edgeops/
-│   └── k3s-deployments/
-│       └── pooja-delivery-k3s.yaml
-├── services/
-│   ├── temple-booking-api/
-│   │   └── main.py
-│   ├── pooja-delivery-api/
-│   ├── devotional-content/
-│   └── cab-booking/
-├── frontend/
-│   ├── web-app/
-│   │   └── pages/
-│   └── mobile-app/
-│       └── main.dart
-├── docs/
-│   └── architecture/
-│       └── dops_architecture.md
-├── scripts/
-│   └── bootstrap.sh
-├── tests/
-│   └── integration-tests/
-├── LICENSE
-├── README.md
-└── .gitignore
+- **AI Ops**: Monitoring, alerting, Grafana dashboards  
+- **ML Ops**: Data pipelines, training, model store, drift detection, retraining  
+- **LLM Ops**: Langchain apps, RAG backend, feedback loops, prompt management  
+- **Fin Ops**: Cost dashboards and cloud resource optimization  
+- **Edge Ops**: Lightweight k3s Kubernetes deployments  
+- **Infrastructure**: Terraform and Helm charts for reproducible infra-as-code  
+- **Deployments**: Kubernetes manifests with overlays for dev/prod  
+- **Services**: Microservices for temple booking, pooja delivery, devotional content, cab booking  
+- **Frontend**: Web and mobile apps for user interaction  
+- **Testing**: Unit, integration, and end-to-end tests  
+- **Documentation**: Architecture and process docs
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Docker & Docker Compose  
+- Kubernetes CLI (kubectl)  
+- Helm 3  
+- Terraform  
+- Python 3.9+ (for ML and backend services)  
+- Node.js 16+ (for frontend apps)
+
+### Setup
+
+1. Clone the repo  
+   ```bash
+   git clone https://github.com/santhoshkumarvs/dops_suite.git
+   cd dops_suite

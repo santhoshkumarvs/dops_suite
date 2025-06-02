@@ -1,0 +1,17 @@
+# infrastructure/helm-charts/temple-booking-api/values.yaml
+replicaCount: 1
+
+image:
+  repository: temple-booking-api
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 5000
+
+ingress:
+  enabled: false
+
+resources: {}
+
