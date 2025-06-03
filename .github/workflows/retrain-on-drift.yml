@@ -1,0 +1,28 @@
+name: Retrain on Drift
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"  # every 15 mins (adjust as needed)
+
+jobs:
+  check-drift:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Query Prometheus for drift
+      run: |
+        DRIFT_SCORE=$(curl -s "http://<your-prometheus-ip>:9090/api/v1/query?query=drift_score" \
+            | jq '.data.result[0].value[1]' | tr -d '"')
+
+        echo "Drift Score: $DRIFT_SCORE"
+
+        # Store for downstream
+        echo "drift_score=$DRIFT_SCORE" >> $GITHUB_ENV
+
+    - name: Trigger Retrain Pipeline if drift < 0.05
+      if: env.drift_score != '' && fromJson(env.drift_score) < 0.05
+      uses: peter-evans/repository-dispatch@v2
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        repository: <your-username>/dops_suite
+        event-type: retrain-model

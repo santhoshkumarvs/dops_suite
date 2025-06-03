@@ -1,0 +1,26 @@
+name: Retrain Model
+
+on:
+  repository_dispatch:
+    types: [retrain-model]
+
+jobs:
+  retrain:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Retrain model
+      run: |
+        cd services/temple-booking-api
+        python retrain.py  # assumes your script handles everything
+
+    - name: Push model artifact
+      run: |
+        git config user.name "github-actions"
+        git config user.email "github-actions@github.com"
+        git add models/
+        git commit -m "Retrained model on drift trigger"
+        git push origin dev

@@ -1,0 +1,17 @@
+grafana:
+  adminPassword: prom-operator
+  service:
+    type: ClusterIP
+    port: 3000
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+    hosts:
+      - grafana.local
+    tls: []
+
+prometheus:
+  prometheusSpec:
+    serviceMonitorSelectorNilUsesHelmValues: false
+    podMonitorSelectorNilUsesHelmValues: false
