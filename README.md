@@ -40,3 +40,36 @@ dops_suite is a modular monorepo that integrates multiple operational domains:
    ```bash
    git clone https://github.com/santhoshkumarvs/dops_suite.git
    cd dops_suite
+
+# DharmaConnect - DOPS Suite ☸️
+
+A spiritually conscious, hyperlocal, multi-tenant DevOps + MLOps + FinOps platform.
+
+## 🚀 Features
+
+- 🔁 GitHub Actions CI/CD + Infra Pipelines
+- 📡 Prometheus & Grafana with TLS
+- 🧠 Alibi Detect Drift → Auto Retrain
+- 🛡️ TLS + Ingress + Helm charts
+- 🔍 PyTest + YAML + Terraform Lint
+- 💰 FinOps-ready Cost Awareness
+- ⚙️ K3d + Terraform-based Infra
+
+## 🛠 Stack
+
+| Layer       | Tool                         |
+|-------------|------------------------------|
+| Infra       | Terraform + k3d              |
+| CI/CD       | GitHub Actions               |
+| Drift       | Alibi Detect (MMDDrift)      |
+| Monitor     | Prometheus + Grafana         |
+| Pipelines   | Airflow (coming soon)        |
+| Secrets     | Sealed Secrets (TBD)         |
+| FinOps      | Kubecost (optional addon)    |
+
+## 📈 Dashboards
+
+Prebuilt Grafana dashboards for drift metrics, usage, alerts.
+
+## 📜 License
+100% Open Source · Built for spiritual, ethical tech.

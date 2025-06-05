@@ -1,0 +1,26 @@
+grafana:
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    hosts:
+      - grafana.local
+    tls:
+      - secretName: grafana-tls
+        hosts:
+          - grafana.local
+  extraSecretMounts:
+    - name: grafana-tls
+      secretName: grafana-tls
+      mountPath: /etc/grafana/ssl
+      readOnly: true
+
+prometheus:
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    hosts:
+      - prometheus.local
+    tls:
+      - secretName: prometheus-tls
+        hosts:
+          - prometheus.local

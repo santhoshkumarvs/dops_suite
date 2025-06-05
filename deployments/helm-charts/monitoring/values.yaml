@@ -1,0 +1,23 @@
+grafana:
+  ingress:
+    enabled: true
+    hosts:
+      - grafana.local
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-staging
+    tls:
+      - secretName: grafana-tls
+        hosts:
+          - grafana.local
+
+prometheus:
+  ingress:
+    enabled: true
+    hosts:
+      - prometheus.local
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-staging
+    tls:
+      - secretName: prometheus-tls
+        hosts:
+          - prometheus.local
