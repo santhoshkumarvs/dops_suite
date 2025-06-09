@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: finsight-api
+  namespace: finsight
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: finsight-api
+  template:
+    metadata:
+      labels:
+        app: finsight-api
+    spec:
+      containers:
+      - name: echo
+        image: hashicorp/http-echo
+        args:
+          - "-text=Hello from FinSight API"
+        ports:
+          - containerPort: 5678
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: finsight-api
+  namespace: finsight
+spec:
+  selector:
+    app: finsight-api
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 5678

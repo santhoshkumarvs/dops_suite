@@ -1,26 +1,41 @@
 grafana:
-  ingress:
-    enabled: true
-    ingressClassName: nginx
-    hosts:
-      - grafana.local
-    tls:
-      - secretName: grafana-tls
-        hosts:
-          - grafana.local
-  extraSecretMounts:
-    - name: grafana-tls
-      secretName: grafana-tls
-      mountPath: /etc/grafana/ssl
-      readOnly: true
+  enabled: true
+  admin:
+    existingSecret: grafana-admin-credentials
+    userKey: admin-user
+    passwordKey: admin-password
+  sidecar:
+    dashboards:
+      enabled: true
+      label: grafana_dashboard
+      folder: /tmp/dashboards
+    datasources:
+      enabled: true
+  resources:
+    limits:
+      cpu: 200m
+      memory: 300Mi
+    requests:
+      cpu: 100m
+      memory: 200Mi
 
 prometheus:
-  ingress:
-    enabled: true
-    ingressClassName: nginx
-    hosts:
-      - prometheus.local
-    tls:
-      - secretName: prometheus-tls
-        hosts:
-          - prometheus.local
+  prometheusSpec:
+    serviceMonitorSelectorNilUsesHelmValues: false
+    resources:
+      requests:
+        memory: 400Mi
+        cpu: 100m
+      limits:
+        memory: 800Mi
+        cpu: 200m
+
+alertmanager:
+  enabled: true
+  resources:
+    limits:
+      cpu: 100m
+      memory: 100Mi
+    requests:
+      cpu: 50m
+      memory: 50Mi
