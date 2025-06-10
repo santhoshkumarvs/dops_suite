@@ -39,3 +39,7 @@ alertmanager:
     requests:
       cpu: 50m
       memory: 50Mi
+additionalScrapeConfigs:
+  - job_name: 'finsight-api'
+    static_configs:
+      - targets: ['finsight-api.finsight.svc.cluster.local:8001']

@@ -33,3 +33,9 @@ spec:
     - protocol: TCP
       port: 8000
       targetPort: 5678
+containers:
+- name: finsight-api
+  image: <your-dockerhub>/finsight-api:latest
+  ports:
+    - containerPort: 8000
+    - containerPort: 8001  # for Prometheus metrics
