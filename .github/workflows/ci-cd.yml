@@ -1,0 +1,28 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ dev ]
+    paths:
+      - "mlops/**"
+      - ".github/workflows/ci-cd.yaml"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Run PyTests
+      run: |
+        pip install -r requirements.txt
+        pytest
+
+  drift-monitor:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Detect Drift
+      run: |
+        pip install -r requirements.txt
+        python mlops/drift/detect_drift.py

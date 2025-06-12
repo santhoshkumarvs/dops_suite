@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "finsight-api.fullname" . }}
+  labels:
+    app: {{ include "finsight-api.name" . }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ include "finsight-api.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "finsight-api.name" . }}
+    spec:
+      containers:
+        - name: {{ include "finsight-api.name" . }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"

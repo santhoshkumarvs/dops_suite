@@ -1,0 +1,48 @@
+# .github/workflows/monitoring-stack.yaml
+name: Deploy Monitoring Stack
+
+on:
+  push:
+    branches:
+      - dev
+      - main
+
+jobs:
+  deploy-monitoring:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: 'latest'
+
+      - name: Setup Helm
+        uses: azure/setup-helm@v3
+        with:
+          version: 'latest'
+
+      - name: Set up Kubeconfig from Secret
+        run: |
+          mkdir -p ~/.kube
+          echo "${{ secrets.KUBECONFIG_DATA }}" > ~/.kube/config
+          chmod 600 ~/.kube/config
+
+      - name: Add Prometheus Helm Repo
+        run: helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+
+      - name: Update Helm Repos
+        run: helm repo update
+
+      - name: Install/Upgrade Monitoring Stack
+        run: |
+          helm upgrade --install prometheus prometheus-community/kube-prometheus-stack \
+            -n monitoring --create-namespace \
+            -f deployments/helm-charts/prometheus-values.yaml
+
+      - name: Verify Prometheus Pod
+        run: |
+          kubectl get pods -n monitoring

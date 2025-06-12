@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "finsight-api.fullname" . }}
+  labels:
+    app: {{ include "finsight-api.name" . }}
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    app: {{ include "finsight-api.name" . }}

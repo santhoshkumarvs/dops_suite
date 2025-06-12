@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: custom-grafana-dashboard
+  namespace: monitoring
+  labels:
+    grafana_dashboard: "1"
+data:
+  drift-overview.json: |
+    {
+      "annotations": {
+        "list": [
+          {
+            "builtIn": 1,
+            "type": "dashboard"
+          }
+        ]
+      },
+      "editable": true,
+      "title": "Drift Monitoring Dashboard",
+      "panels": [
+        {
+          "type": "graph",
+          "title": "Model Drift Score",
+          "targets": [
+            {
+              "expr": "drift_score",
+              "legendFormat": "drift_score",
+              "refId": "A"
+            }
+          ]
+        }
+      ],
+      "schemaVersion": 16,
+      "version": 1
+    }

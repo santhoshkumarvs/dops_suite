@@ -5,3 +5,25 @@ __pycache__/
 .DS_Store
 *.ipynb
 terraform.tfstate
+grafana-secret.yaml
+*.secret.yaml
+grafana-secret.yaml
+# Binaries and archives
+*.tar.gz
+*.tgz
+
+# K8s-specific generated manifests or external charts
+kube-prometheus-stack-*.tgz
+kubeseal-*.tar.gz
+sealed-secrets/
+deployments/helm-charts/prometheus/
+deployments/argo-rollouts/
+infrastructure/terraform/finsight-api/.terraform/
+.finsight-api-token
+
+# Logs & service IPs
+*.log
+10.255.255.254:53:
+
+# Optional if you don’t want local k3d files pushed
+deployments/k3d/
